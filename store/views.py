@@ -84,6 +84,8 @@ def delete_box(request,pk):
         box = Box.objects.get(pk=pk)
         if request.user == box.created_by :
             box.delete()
+            data = {'sucess':'Sucessfully Deleted'}
+            return Response(data, status=status.HTTP_403_FORBIDDEN)
         else:
             data = {'error':'you are not authorised.'}
             return Response(data, status=status.HTTP_403_FORBIDDEN)
